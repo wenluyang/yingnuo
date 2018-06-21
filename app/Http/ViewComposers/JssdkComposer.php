@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 use EasyWeChat;
 
+
 class JssdkComposer
 {
     public function compose(View $view)
@@ -13,6 +14,7 @@ class JssdkComposer
         $json = self::jssdk();
         $current_url =  url()->current();
         $user_id = Auth::user()->id;
+
         $user = User::where(['id' => $user_id])->first();
         $userid = $user->id;
         $url = $current_url.'?userid='.$userid;
@@ -22,7 +24,7 @@ class JssdkComposer
     public static function jssdk()
     {
         $officialAccount = EasyWeChat::officialAccount();
-        $json = $officialAccount->jssdk->buildConfig(['onMenuShareTimeline','onMenuShareAppMessage','onMenuShareQQ','onMenuShareWeibo','onMenuShareQZone'], false);
+        $json = $officialAccount->jssdk->buildConfig(['onMenuShareTimeline','onMenuShareAppMessage'], false);
         return $json;
     }
 }
