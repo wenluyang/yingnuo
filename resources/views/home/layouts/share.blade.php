@@ -3,10 +3,10 @@
     wx.config({!! $json !!});
     wx.ready(function () {
         wx.onMenuShareTimeline({
-            title: '郭老贼-分享免费吃无花果', // 分享标题
-            desc: '郭老贼-打造新一代健康、高品质农业+互联网弄潮儿。分享链接免费得1斤无花果。认购果树，免费得4斤无花果。',//分享描述
+            title: '{{$title}}', // 分享标题
+            desc: '{{$desc}}',//分享描述
             link: '{{$url}}', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
-            imgUrl: '{{asset('img/image/glzlogo.png')}}', // 分享图标
+            imgUrl: '{{$imgUrl}}', // 分享图标
             success: function () {
                 console.log('share succeed');
             },
@@ -17,10 +17,10 @@
     });
     wx.ready(function () {
         wx.onMenuShareAppMessage({
-            title: '郭老贼-分享免费吃无花果', // 分享标题
-            desc: '郭老贼-打造新一代健康、高品质农业+互联网弄潮儿。分享链接免费得1斤无花果。认购果树，免费得4斤无花果。',//分享描述
+            title: '{{$title}}', // 分享标题
+            desc: '{{$desc}}',//分享描述
             link: '{{$url}}', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
-            imgUrl: '{{asset('img/image/glzlogo.png')}}', // 分享图标
+            imgUrl: '{{$imgUrl}}', // 分享图标
             success: function () {
                 console.log('share succeed');
             },
@@ -29,48 +29,7 @@
             }
         });
     });
-    {{--wx.ready(function () {--}}
-        {{--wx.onMenuShareQQ({--}}
-            {{--title: '郭老贼-分享免费吃无花果', // 分享标题--}}
-            {{--desc: '郭老贼-打造新一代健康、高品质农业+互联网弄潮儿。分享链接免费得1斤无花果。认购果树，免费得4斤无花果。',//分享描述--}}
-            {{--link: '{{$url}}', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致--}}
-            {{--imgUrl: '{{asset('img/image/glzlogo.png')}}', // 分享图标--}}
-            {{--success: function () {--}}
-                {{--console.log('share succeed');--}}
-            {{--},--}}
-            {{--cancel: function () {--}}
-                {{--console.log('share canceled');--}}
-            {{--}--}}
-        {{--});--}}
-    {{--});--}}
-    {{--wx.ready(function () {--}}
-        {{--wx.onMenuShareWeibo({--}}
-            {{--title: '郭老贼-分享免费吃无花果', // 分享标题--}}
-            {{--desc: '郭老贼-打造新一代健康、高品质农业+互联网弄潮儿。分享链接免费得1斤无花果。认购果树，免费得4斤无花果。',//分享描述--}}
-            {{--link: '{{$url}}', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致--}}
-            {{--imgUrl: '{{asset('img/image/glzlogo.png')}}', // 分享图标--}}
-            {{--success: function () {--}}
-                {{--console.log('share succeed');--}}
-            {{--},--}}
-            {{--cancel: function () {--}}
-                {{--console.log('share canceled');--}}
-            {{--}--}}
-        {{--});--}}
-    {{--});--}}
-    {{--wx.ready(function () {--}}
-        {{--wx.onMenuShareQZone({--}}
-            {{--title: '郭老贼-分享免费吃无花果', // 分享标题--}}
-            {{--desc: '郭老贼-打造新一代健康、高品质农业+互联网弄潮儿。分享链接免费得1斤无花果。认购果树，免费得4斤无花果。',//分享描述--}}
-            {{--link: '{{$url}}', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致--}}
-            {{--imgUrl: '{{asset('img/image/glzlogo.png')}}', // 分享图标--}}
-            {{--success: function () {--}}
-                {{--console.log('share succeed');--}}
-            {{--},--}}
-            {{--cancel: function () {--}}
-                {{--console.log('share canceled');--}}
-            {{--}--}}
-        {{--});--}}
-    {{--});--}}
+
 
 </script>
 
