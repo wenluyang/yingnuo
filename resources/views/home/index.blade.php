@@ -13,7 +13,7 @@
                 <ul>
                     <li> <a href="/" title=""> 首页 </a> </li>
                     <li> <a href="#" title=""> 关于盈诺 </a> </li>
-                    <li> <a href="#" title=""> 产品中心 </a> </li>
+                    <li> <a href="" title=""> 产品中心 </a> </li>
                     <li> <a href="#" title=""> 商学院 </a> </li>
                     <li> <a href="#" title=""> 经销商故事 </a> </li>
                     <li> <a href="#" title=""> 创新平台 </a> </li>
