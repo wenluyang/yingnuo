@@ -66,3 +66,12 @@ function sortOrImplode($arr){
     sort($arr, 1);
     return implode(',', $arr);
 }
+
+//获取当前登录用户的ID
+function CurrentUserId()
+{
+
+    return \Auth::user()->id;
+
+
+}

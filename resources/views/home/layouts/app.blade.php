@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <!--共用css、js-->
     <link href="/css/all.css" rel="stylesheet">
     <link rel="stylesheet" href="/css/weui.min.css">
@@ -13,15 +14,18 @@
     <link href="/css/iconfont/iconfont.css" rel="stylesheet">
     <link href="/css/nav.css" rel="stylesheet">
     @yield('css')
-    <script src="/js/rem.js"></script>
-    <script src="/js/mui.min.js"></script>
-    <script src="/js/jquery-1.11.3.min.js" type="text/javascript"></script>
-    <script src="/js/nav.js" type="text/javascript"></script>
-    <script src="/js/jquery-weui.js"></script>
-    <script src="/js/swiper.js"></script>
+    <script src="js/jquery-1.11.3.min.js" type="text/javascript"></script>
+    <script src="js/nav.js" type="text/javascript"></script>
+    <script src="js/mui.min.js"></script>
+    <script src="js/jquery-weui.js"></script>
+    <script src="{{asset_url('js/common.js')}}"></script>
+
+    <script type="text/javascript">
+        $.ajaxSetup({headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}});
+    </script>
 
 </head>
-<body>
+<body style="background:#fff;" ontouchstart>
 @yield('content')
 
 

@@ -5,67 +5,7 @@
 @stop
 
 @section('content')
-    <div style="background:#e50012; height:1.44rem;">
-        <div class="downmenu f-fr"> <img src="images/t_ico.png" title=""> </div>
-        <!-- 下拉菜单 -->
-        <section class="menu2" id="menu">
-            <div class="slideMenu">
-                <ul>
-                    <li> <a href="/" title=""> 首页 </a> </li>
-                    <li> <a href="#" title=""> 关于盈诺 </a> </li>
-                    <li> <a href="" title=""> 产品中心 </a> </li>
-                    <li> <a href="#" title=""> 商学院 </a> </li>
-                    <li> <a href="#" title=""> 经销商故事 </a> </li>
-                    <li> <a href="#" title=""> 创新平台 </a> </li>
-                </ul>
-            </div>
-        </section>
-        <!--顶部搜索-->
-        <header class="mui-bar mui-bar-nav" id="header">
-            <div class="top-sch-box flex-col">
-                <div class="centerflex">
-                    <i class="fdj iconfont icon-search"></i>
-                    <div class="sch-txt">请输入搜索关键词</div>
-                </div>
-            </div>
-
-        </header>
-
-        <div id="main" class="mui-clearfix">
-            <!-- 搜索层 -->
-            <div class="pop-schwrap">
-                <div class="ui-scrollview">
-                    <div class="mui-bar mui-bar-nav clone">
-                        <a class="btn btn-back" href="javascript:;"></a>
-                        <div class="top-sch-box flex-col">
-                            <div class="centerflex">
-                                <input class="sch-input mui-input-clear" type="text" name="" id="" placeholder="请输入搜索关键词" />
-                            </div>
-                        </div>
-                        <a class="mui-btn mui-btn-primary sch-submit" href="#">搜索</a>
-                    </div>
-                    <div class="scroll-wrap">
-                        <div class="mui-scroll">
-                            <div class="sch-cont">
-                                <div class="section ui-border-b">
-                                    <div class="tit">热门搜索</div>
-                                    <div class="tags">
-                                        <span class="tag">外套</span><span class="tag">连衣裙</span><span class="tag">运动鞋</span><span class="tag">睡衣</span>
-                                    </div>
-                                </div>
-                                <div class="section">
-                                    <div class="tit"></i>最近搜索</div>
-                                    <div class="tags">
-                                        <span class="tag">外套</span><span class="tag">连衣裙</span><span class="tag">运动鞋</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    @include('home.layouts.top')
     <!--内容-->
     <div class='weui-content'>
         <!--顶部轮播-->
@@ -81,8 +21,8 @@
         <!--图标分类-->
         <div class="weui-flex wy-iconlist-box">
             <div class="weui-flex__item"><a href="#" class="wy-links-iconlist"><div class="img"><img src="images/icon-link1.png"></div><p>关于盈诺</p></a></div>
-            <div class="weui-flex__item"><a href="#" class="wy-links-iconlist"><div class="img"><img src="images/icon-link2.png"></div><p>产品中心</p></a></div>
-            <div class="weui-flex__item"><a href="#" class="wy-links-iconlist"><div class="img"><img src="images/icon-link3.png"></div><p>商学院</p></a></div>
+            <div class="weui-flex__item"><a href="{{route('category')}}" class="wy-links-iconlist"><div class="img"><img src="images/icon-link2.png"></div><p>产品中心</p></a></div>
+            <div class="weui-flex__item"><a href="{{route('article')}}" class="wy-links-iconlist"><div class="img"><img src="images/icon-link3.png"></div><p>商学院</p></a></div>
             <div class="weui-flex__item"><a href="#" class="wy-links-iconlist"><div class="img"><img src="images/icon-link4.png"></div><p>经销商故事</p></a></div>
         </div>
         <!--头条切换-->
@@ -241,6 +181,9 @@
 @stop
 
 @section('js')
+
+    <script src="/js/rem.js"></script>
+    <script src="/js/swiper.js"></script>
     <script>
         $(".swiper-banner").swiper({
             loop: true,

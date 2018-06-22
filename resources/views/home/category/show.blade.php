@@ -23,6 +23,6 @@
       产品图片:{{$goods->image}}<br>
       产品价格:{{$goods->price}}<br>
       产品库存:{{$goods->stock}}<br>
-      产品链接： {{route('goods.show',['goods'=>$goods->id,'category'=>$category->id])}}
+      产品链接： {{route('goods.show',['goods'=>$goods->id])}}
     @endforeach
 @stop
