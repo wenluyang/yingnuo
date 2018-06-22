@@ -36,7 +36,7 @@
                 </div>
                 <div class="swiper-pagination"></div>
             </div>
-            <a href="#" class="newsmore"><i class="news-icon-more"></i></a>
+            <a href="{{route('news')}}" class="newsmore"><i class="news-icon-more"></i></a>
         </div>
         <!--产品展示-->
         <div class="wy-Module">
@@ -128,7 +128,7 @@
                     <img class="School_hd" src="{{$article->image}}" />
                     <div class="School_con">
                         <a href="#">{{str_limit($article->title,24,'...')}}</a>
-                        <p>{{str_limit($article->description,48,'...')}}<a style="color:#e50012;" href="#">【点击详情】</a></p>
+                        <p>{{str_limit($article->description,48,'...')}}<a style="color:#e50012;" href="{{route('article.show',['article'=>$article->id])}}">【点击详情】</a></p>
                     </div>
                 </li>
                  @endforeach
@@ -178,6 +178,10 @@
 
         </div>
     </div>
+@stop
+
+@section('css')
+    <link href="/css/nav.css" rel="stylesheet">
 @stop
 
 @section('js')

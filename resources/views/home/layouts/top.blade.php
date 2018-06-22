@@ -1,5 +1,7 @@
+
+
 <div style="background:#e50012; height:1.44rem;" class="search_header">
-    <div class="downmenu f-fr"> <img src="images/t_ico.png" title=""> </div>
+    <div class="downmenu f-fr"> <img src="/images/t_ico.png" title=""> </div>
     <!-- 下拉菜单 -->
     <section class="menu2" id="menu">
         <div class="slideMenu">

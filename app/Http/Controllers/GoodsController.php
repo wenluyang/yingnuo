@@ -93,7 +93,7 @@ class GoodsController extends Controller
                         'id' => $_item['id'],
                         'quantity' => $_item['quantity'],
                         'product_id' => $_item['product_id'],
-                        //'product_price' => $product_mapping['price'],
+                        'product_price' => $product_mapping['price'],
                         'product_stock' => $product_mapping['stock'],
                         'product_name' => $product_mapping['name'],
                         'product_main_image' => buildPicUrl($product_mapping['image']),
@@ -101,7 +101,7 @@ class GoodsController extends Controller
                 }
             }
 
-            return home_view("product.cart", compact('data'));
+            return home_view("goods.cart", compact('data'));
         }
 
         $act = $request->get('act', '');

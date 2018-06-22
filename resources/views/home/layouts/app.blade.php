@@ -12,12 +12,12 @@
     <link rel="stylesheet" href="/css/jquery-weui.css">
     <link rel="stylesheet" href="/css/style.css">
     <link href="/css/iconfont/iconfont.css" rel="stylesheet">
-    <link href="/css/nav.css" rel="stylesheet">
+
     @yield('css')
-    <script src="js/jquery-1.11.3.min.js" type="text/javascript"></script>
-    <script src="js/nav.js" type="text/javascript"></script>
-    <script src="js/mui.min.js"></script>
-    <script src="js/jquery-weui.js"></script>
+    <script src="/js/jquery-1.11.3.min.js" type="text/javascript"></script>
+    <script src="/js/nav.js" type="text/javascript"></script>
+    <script src="/js/mui.min.js"></script>
+    <script src="/js/jquery-weui.js"></script>
     <script src="{{asset_url('js/common.js')}}"></script>
 
     <script type="text/javascript">

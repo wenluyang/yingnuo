@@ -1,4 +1,4 @@
-@extends('home.layouts.app',['isshare'=>false,'hasfooter'=>true])
+@extends('home.layouts.app',['isshare'=>true,'hasfooter'=>true])
 
 
 @section('title')
@@ -7,19 +7,15 @@
 
 
 @section('content')
+    <a href="{{route('home')}}">
+        <img style="float:left;text-align:center" src="/images/icon-02.png">
+    </a>
     @include('home.layouts.top')
 <!--内容-->
 <div style="background:#fff;" class='weui-content'>
-
-
-
-
         <div class="page" style="display: none">
             <input type="text" name="category_id" value="{{request()->category_id}}">
         </div>
-
-
-
 
 
     <!--列表页导航栏目-->
@@ -50,7 +46,7 @@
                 <img class="con_sxy_hd" src="{{$_item['news_image_url']}}" />
                 <div class="con_sxy_con">
                     <a href="#">{{$_item['title']}}</a>
-                    <p>{{str_limit($_item['description'],48,'...')}}<a style="color:#e50012;" href="#">【点击详情】</a></p>
+                    <p>{{str_limit($_item['description'],48,'...')}}<a style="color:#e50012;" href="{{route('article.show',['article'=>$_item['id']])}}">【点击详情】</a></p>
                 </div>
             </li>
             @endforeach
@@ -89,6 +85,10 @@
 
 
  @stop
+
+@section('css')
+        <link href="/css/nav.css" rel="stylesheet">
+@stop
 
 @section('js')
     <!--非公用-->

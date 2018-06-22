@@ -2,18 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Article;
-use App\Models\ArticleCat;
-use App\Models\MemberFav;
+use App\Models\News;
+use App\Models\NewsCat;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class ArticleController extends Controller
+class NewsController extends Controller
 {
     public function index(Request $request)
     {
         // 用于分享的参数
-        $title = config('盈诺商学院');
+        $title = config('盈诺新闻中心');
         $imgUrl = config('webinfo.imgUrl');
         $desc = config('webinfo.desc');
 
@@ -32,7 +31,7 @@ class ArticleController extends Controller
                 'view_count' => $_item['view_count'],
                 'video' => $_item['video'],
                 'recom' => $_item['recom'],
-                'description' => str_limit($_item['description'],48,'...'),
+                'description' => str_limit($_item['description'],54,'...'),
             ];
         }
 
@@ -42,9 +41,9 @@ class ArticleController extends Controller
             'sort' => $sort,
         ];
 
-        $articlecats = ArticleCat::where(['status' => 1])->orderBy('sort', 'desc')->get();
+        $newscats = NewsCat::where(['status' => 1])->orderBy('sort', 'desc')->get();
 
-        return home_view('article.index', compact('articlecats', 'data','title','imgUrl','desc'));
+        return home_view('news.index', compact('newscats', 'data','title','imgUrl','desc'));
     }
 
     //搜索参数
@@ -62,10 +61,10 @@ class ArticleController extends Controller
             $p = 1;
         }
 
-        $query = Article::where(['status' => 1]);
+        $query = News::where(['status' => 1]);
 
         if ($category_id) {
-            $query->where(['articlecat_id' => $category_id]);
+            $query->where(['newscat_id' => $category_id]);
         }
 
 
@@ -104,7 +103,7 @@ class ArticleController extends Controller
                 'view_count' => $_item['view_count'],
                 'video' => $_item['video'],
                 'recom' => $_item['recom'],
-                'description' => str_limit($_item['description'],48,'...'),
+                'description' => str_limit($_item['description'],54,'...'),
             ];
         }
 
@@ -113,26 +112,24 @@ class ArticleController extends Controller
 
 
     //新闻详情
-    public function show(Article $article)
+    public function show(News $news)
     {
         $user_id=\Auth::user()->id;
 
         // 相关新闻的调用
-        $tags = $article->tags;
+        $tags = $news->tags;
         $tag = explode(',', $tags);
         $where_tags = '';
         foreach ($tag as $_item) {
             $where_tags = $where_tags."tags like '%$_item%' or ";
         }
         $where = substr($where_tags, 0, strlen($where_tags) - 3);
-        $rel_article = Article::where(DB::raw($where))->orderBy('id', 'desc')->where('id', '!=', $article->id)->limit(5)->get();
+        $rel_news = News::where(DB::raw($where))->orderBy('id', 'desc')->where('id', '!=', $news->id)->limit(5)->get();
 
-        $article->view_count=$article->view_count+1;
-        $article->update();
 
         //是否收藏
-        //$hasfaved= MemberFav::where(['user_id'=>$user_id,'befav_id'=>$article->id,'type'=>'App\Models\News'])->get()->count();
-        return home_view('article.show', compact('article', 'rel_article'));
+        //$hasfaved= UserFav::where(['user_id'=>$user_id,'befav_id'=>$news->id,'type'=>'App\Models\News'])->get()->count();
+        return home_view('news.show', compact('news', 'rel_news'));
     }
 
 }

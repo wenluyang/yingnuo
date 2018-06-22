@@ -34,6 +34,8 @@ class UserController extends Controller
         $pay_order_list = PayOrder::where([ 'user_id' => CurrentUserId() ])
             ->orderBy('id','desc')->get()->toArray();
 
+
+
         $list = [];
         if( $pay_order_list ) {
             $pay_order_items_list = PayOrderItem::where(['user_id' => CurrentUserId()])
@@ -59,6 +61,7 @@ class UserController extends Controller
             }
 
 
+
             foreach ($pay_order_list as $_pay_order_info) {
 
                 $list[] = [
@@ -80,7 +83,7 @@ class UserController extends Controller
         }
 
 
-        return home('user.order',compact('list'));
+        return home_view('user.order',compact('list'));
 
     }
 
@@ -92,6 +95,7 @@ class UserController extends Controller
         if( $list ){
             foreach( $list as $_item ){
                 $book_mapping = $_item->belongsToProduct;
+
                 $data[] = [
                     'id' => $_item['id'],
                     'product_id' => $_item['product_id'],

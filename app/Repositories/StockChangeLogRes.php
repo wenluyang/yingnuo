@@ -17,11 +17,15 @@ class StockChangeLogRes
 
         $info = Goods::where(['id' => $product_id])->first();
 
+
+
         if (! $info) {
             return false;
         }
         $info->stock = $info['stock'] + $unit;
-        $info->update();
+        $info->save();
+
+
 
         $new_info = Goods::where(['id' => $product_id])->first();
 

@@ -39,7 +39,7 @@ var product_index_ops = {
                 };
 
                 $.ajax({
-                    url:common_ops.buildMUrl( "article/search" ),
+                    url:common_ops.buildMUrl( "news/search" ),
                     type:'GET',
                     dataType:'json',
                     data:data,
@@ -51,7 +51,7 @@ var product_index_ops = {
                         var html = "";
                         for( idx in res.data.data ){
                             var info = res.data.data[ idx ];
-                            html += '<li><img src="'+ info['main_image_url'] +'"  class="con_sxy_hd"/><div class="con_sxy_con"><a href="' + common_ops.buildMUrl( "article/###/show".replace('###', info['id'] )) + '">'+ info['title'] +'</a><p>'+ info['description'] +'<a style=color:#e50012;href="' + common_ops.buildMUrl( "article/###/show".replace('###', info['id'] )) + '">【点击详情】</a></p></div></li>'
+                            html += '<li><a href="' + common_ops.buildMUrl( "news/###/show".replace('###', info['id'] )) + '"><img src="'+ info['main_image_url'] +'"  class="con_new_hd"/></a><div class="con_new_con"><a href="' + common_ops.buildMUrl( "article/###/show".replace('###', info['id'] )) + '">'+ info['title'] +'</a><p>'+ info['description'] +'</p></div></li>'
                         }
 
                         $(".probox ul.prolist").append( html );
@@ -70,7 +70,7 @@ var product_index_ops = {
             sort:this.sort,
             category_id:$(".page input[name=category_id]").val()
         };
-        window.location.href = common_ops.buildMUrl("article",params);
+        window.location.href = common_ops.buildMUrl("news",params);
     }
 };
 $(document).ready(function () {
