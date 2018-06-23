@@ -4,6 +4,7 @@ route::group(['prefix' => 'admin','namespace'=>'Admin'], function () {
     Route::get('/login', 'DefaultController@login')->name('admin.loginform');
     Route::post('/login', 'DefaultController@login')->name('admin.login');
     Route::post('/logout', 'DefaultController@logout')->name('admin.logout');
+    Route::get('/city/cascade','CityController@Cascade');
 
     Route::group(['middleware' => 'auth:admin'], function () {
 
@@ -93,6 +94,48 @@ route::group(['prefix' => 'admin','namespace'=>'Admin'], function () {
         Route::get('goods/{goods}/edit', 'GoodsController@edit')->name('admin.goods.edit');
         Route::post('goods/{goods}/update', 'GoodsController@update')->name('admin.goods.update');
         Route::get('goods/{goods}/delete', 'GoodsController@destroy')->name('admin.goods.delete');
+
+        #产品记录
+        Route::get('goods/{goods}/info', 'GoodsController@info')->name('admin.goods.info');
+
+        #财务管理
+        Route::get('finance','FinanceController@index')->name('admin.finance.index');
+        Route::get('finance/dshenhe','FinanceController@dshenhe')->name('admin.finance.dshenhe');
+        Route::get('finance/yqueren','FinanceController@yqueren')->name('admin.finance.yqueren');
+        Route::get('finance/yfahuo','FinanceController@yfahuo')->name('admin.finance.yfahuo');
+        Route::get('finance/ywancheng','FinanceController@ywancheng')->name('admin.finance.ywancheng');
+        Route::get('finance/yguanbi','FinanceController@yguanbi')->name('admin.finance.yguanbi');
+        Route::get('finance/payinfo','FinanceController@payinfo')->name('admin.finance.payinfo');
+
+        # 修改收货人地址
+        Route::get('/address','AddressController@index')->name('admin.address.edit');
+        Route::post('/address/update','AddressController@update')->name('admin.address.update');
+
+        #订单管理
+        Route::post('orders/confirm','FinanceController@confirm')->name('admin.order.confirm');
+        Route::post('orders/send','FinanceController@send')->name('admin.order.send');
+        Route::post('orders/wancheng','FinanceController@wancheng')->name('admin.order.wancheng');
+        Route::post('orders/quxiao','FinanceController@quxiao')->name('admin.order.quxiao');
+
+        Route::get('orders','OrderController@index')->name('admin.order.index');
+        Route::post('orders/{order}/access','Admin\OrderController@access')->name('admin.order.access');
+        Route::post('orders/{order}/deliver','Admin\OrderController@deliver')->name('admin.order.deliver');
+        Route::post('orders/{order}/complete','Admin\OrderController@complete')->name('admin.order.complete');
+
+        #快递
+        Route::post('express','KuaidiController@store');
+        Route::get('express/edit','KuaidiController@edit');
+
+        #用户
+        Route::get('users','UserController@index')->name('admin.user.index');
+        Route::get('tuijian_users','UserController@getTuijian')->name('admin.tjuser.index');
+        Route::post('users/{user}/message','UserController@message')->name('admin.user.message');
+        Route::get('users/recomlog','RecomLogController@index')->name('admin.user.recomlog');
+
+
+
+
+
         //#产品类型管理
         //Route::get('type', 'TypeController@index')->name('admin.type.index');
         //Route::post('type/store', 'TypeController@store')->name('admin.type.store');

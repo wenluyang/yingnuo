@@ -51,6 +51,7 @@
 
                                             <td>
                                                 <a href="{{route('admin.goods.edit',['goods'=>$item->id])}}" class="btn btn-info edit">编辑</a>
+                                                <a href="{{route('admin.goods.info',['goods'=>$item->id])}}" class="btn btn-success edit">记录</a>
                                                 <a   class="btn btn-danger del" href="{{route('admin.goods.delete',['goods'=>$item->id])}}">删除</a>
                                             </td>
                                         </tr>

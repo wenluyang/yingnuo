@@ -50,7 +50,7 @@ class AdminNav
 
                     'news' => [
                         'name' => '新闻管理',
-                        'route' => 'admin.newscat.index',
+                        'route' => 'admin.news.index',
                         'functions' => [
                             'index' => ['name' => '新闻列表', 'route' => 'admin.news.index', 'display' => true],
                             'create' => ['name' => '新闻创建', 'route' => 'admin.news.create', 'display' => true],
@@ -64,7 +64,7 @@ class AdminNav
 
                     'shcool' => [
                         'name' => '商学院管理',
-                        'route' => 'admin.articlecat.index',
+                        'route' => 'admin.article.index',
                         'functions' => [
                             'index' => ['name' => '商学院文章列表', 'route' => 'admin.article.index', 'display' => true],
                             'create' => ['name' => '商学院文章创建', 'route' => 'admin.article.create', 'display' => true],
@@ -96,6 +96,21 @@ class AdminNav
                             'index' => ['name' => '产品列表', 'route' => 'admin.goods.index', 'display' => true],
                             'create'   => ['name' => '产品添加', 'route' => 'admin.goods.create', 'display' => true],
                             'edit'   => ['name' => '产品编辑', 'route' => 'admin.goods.edit', 'display' => false],
+                            'info'   => ['name' => '产品记录', 'route' => 'admin.goods.info', 'display' => false],
+                        ],
+                    ],
+
+                    'order' => [
+                        'name' => '订单管理',
+                        'route' => 'admin.finance.dshenhe',
+                        'functions' => [
+                            //'index' => ['name' => '全部订单', 'route' => 'admin.finance.index', 'display' => true],
+                            'dshenhe' => ['name' => '等待审核订单', 'route' => 'admin.finance.dshenhe', 'display' => true],
+                            'yqueren' => ['name' => '已审核待发货订单', 'route' => 'admin.finance.yqueren', 'display' => true],
+                            'yfahuo' => ['name' => '已发货订单', 'route' => 'admin.finance.yfahuo', 'display' => true],
+                            'ywancheng' => ['name' => '已完成订单', 'route' => 'admin.finance.ywancheng', 'display' => true],
+                            'yguanbi' => ['name' => '已取消的订单', 'route' => 'admin.finance.yguanbi', 'display' => true],
+                            'payinfo' => ['name' => '订单详情', 'route' => 'admin.finance.payinfo', 'display' => false],
 
                         ],
                     ],
@@ -107,21 +122,16 @@ class AdminNav
 
 
 
+                    'user' => [
+                        'name' => '用户管理',
+                        'route' => 'admin.user.index',
+                        'functions' => [
+                            'index' => ['name' => '用户列表', 'route' => 'admin.user.index', 'display' => true],
+                            //'guanxi' => ['name' => '推荐关系表', 'route' => 'admin.tjuser.index', 'display' => true],
+                            //'recomlog'   => ['name' => '推荐日志', 'route' => 'admin.user.recomlog', 'display' => true],
+                        ],
+                    ],
 
-
-                    //'users' => [
-                    //    'name' => '用户管理',
-                    //    'route' => 'admin.articlecat.index',
-                    //    'functions' => [
-                    //        'index' => ['name' => '用户列表', 'route' => 'admin.article.index', 'display' => true],
-                    //        'create' => ['name' => '商学院文章创建', 'route' => 'admin.article.create', 'display' => true],
-                    //        'show'   => ['name' => '商学院文章详情', 'route' => 'admin.article.show', 'display' => false],
-                    //        'category' => ['name' => '商学院分类', 'route' => 'admin.articlecat.index', 'display' => true],
-                    //        'catshow'   => ['name' => '商学院分类详情', 'route' => 'admin.articlecat.show', 'display' => false],
-                    //    ],
-                    //],
-                    //
-                    //
                     //
                     //
                     //'orders' => [

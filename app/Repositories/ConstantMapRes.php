@@ -31,7 +31,7 @@ class ConstantMapRes
     ];
 
     public static $express_status_mapping = [
-        1 => '会员已签收',
+        1 => '会员已签收,该订单已完成',
         -6 => '已发货待签收',
         -7 => '订单已确认等待发货',
         -8 => '订单等待审核',
