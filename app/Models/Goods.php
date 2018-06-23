@@ -8,5 +8,9 @@ class Goods extends Model
 {
     protected $guarded=[];
 
+    public function Category()
+    {
+        return $this->belongsTo('App\Models\Category');
+    }
 
 }

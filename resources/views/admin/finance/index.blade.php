@@ -36,7 +36,10 @@
         </tr>
         </thead>
         <tbody>
+
+
         @foreach($data as $_item)
+
         <tr style="font-size: 12px">
             <td>
                     <span class="btn btn-success btn-xs cmd-copy-url" data-toggle="collapse" href="#collapse{{$_item['id']}}" >
@@ -49,7 +52,8 @@
             <td>
 
                名称： {{$_item['realname']}}<br>
-                电话：{{$_item['user_mobile']}}
+                电话：{{$_item['user_mobile']}}<br>
+                会员等级:22<br>
 
 
             </td>
@@ -60,9 +64,15 @@
             </td>
             <td>{{$_item['total_price']}}</td>
             <td>
-                收件人：{{$_item['receiver']}}<br>
-                电话：{{$_item['mobile']}}<br>
+
+                收件人：{{isset($_item['reciver_new'])?$_item['reciver_new']:$_item['receiver']}}<br>
+                电话：{{isset($_item['mobile_new'])?$_item['mobile_new']:$_item['mobile']}}<br>
+                
+                @if (isset($_item['address_new']))
+                    {{$_item['address_new']}}
+                @else
                 地址：{{$_item['provide']}}{{$_item['city']}}{{$_item['area']}}{{$_item['address']}}
+                @endif
             </td>
             {{--<td>{{$_item['status_desc']}}</td>--}}
             <td>{{$_item['created_time']}}</td>
@@ -104,10 +114,14 @@
                             <tr>
                                 <td>收件人信息</td>
                                 <td>
-                                    收件人：{{$_item['receiver']}}<br>
-                                    电话：{{$_item['mobile']}}<br>
-                                    地址：{{$_item['provide']}}{{$_item['city']}}{{$_item['area']}}{{$_item['address']}}
+                                    收件人：{{isset($_item['reciver_new'])?$_item['reciver_new']:$_item['receiver']}}<br>
+                                    电话：{{isset($_item['mobile_new'])?$_item['mobile_new']:$_item['mobile']}}<br>
 
+                                    @if (isset($_item['address_new']))
+                                        {{$_item['address_new']}}
+                                    @else
+                                        地址：{{$_item['provide']}}{{$_item['city']}}{{$_item['area']}}{{$_item['address']}}
+                                    @endif
                                 </td>
                             </tr>
                             <tr>

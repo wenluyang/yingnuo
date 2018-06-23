@@ -97,6 +97,7 @@ class AdminNav
                             'create'   => ['name' => '产品添加', 'route' => 'admin.goods.create', 'display' => true],
                             'edit'   => ['name' => '产品编辑', 'route' => 'admin.goods.edit', 'display' => false],
                             'info'   => ['name' => '产品记录', 'route' => 'admin.goods.info', 'display' => false],
+                            'price'   => ['name' => '产品设置', 'route' => 'admin.goods.price', 'display' => false],
                         ],
                     ],
 

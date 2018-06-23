@@ -13,7 +13,6 @@ class OrderController extends Controller
     public function ops(Request $request)
     {
 
-
         $act = $request->get('act', '');
         $id = intval($request->get('id', 0));
 

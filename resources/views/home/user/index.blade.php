@@ -10,7 +10,7 @@
             </div>
             <div class="wy_wa">
                 <h2>{{\Auth::user()->nickname}}</h2>
-                <p>积分：<span>{{\Auth::user()->score}}</span></p><span>等级：普通会员</span>
+                <p>积分：<span>{{\Auth::user()->score}}</span></p><span>等级：{{$jibie}}</span>
             </div>
 
         </div>

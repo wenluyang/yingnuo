@@ -65,12 +65,20 @@ class FinanceController extends Controller
                 $data[] = [
                     'id' => $_item['id'],
                     'realname' => User::where(['id'=>$_item['user_id']])->first()->realname,
+
                     'user_mobile' => User::where(['id'=>$_item['user_id']])->first()->mobile,
                     'sn' => date("Ymd", strtotime($_item['created_at'])).$_item['id'],
                     'total_price' => $_item['total_price'],
+
                     'receiver' => MemberAddress::where(['id'=>$_item['express_address_id']])->first()->nickname,
+                    'reciver_new' => PayOrder::where(['id'=> $_item['id']])->first()->reciver_new,
                     'mobile' => MemberAddress::where(['id'=>$_item['express_address_id']])->first()->mobile,
+                    'mobile_new' => PayOrder::where(['id'=> $_item['id']])->first()->mobile_new,
                     'address' => MemberAddress::where(['id'=>$_item['express_address_id']])->first()->address,
+                    'address_new' => PayOrder::where(['id'=> $_item['id']])->first()->address_new,
+
+
+
                     'provide' => MemberAddress::where(['id'=>$_item['express_address_id']])->first()->belongsToCity->province,
                     'city' => MemberAddress::where(['id'=>$_item['express_address_id']])->first()->belongsToCity->city,
                     'area' => MemberAddress::where(['id'=>$_item['express_address_id']])->first()->belongsToCity->area,
@@ -145,8 +153,11 @@ class FinanceController extends Controller
                     'sn' => date("Ymd", strtotime($_item['created_at'])).$_item['id'],
                     'total_price' => $_item['total_price'],
                     'receiver' => MemberAddress::where(['id'=>$_item['express_address_id']])->first()->nickname,
+                    'reciver_new' => PayOrder::where(['id'=> $_item['id']])->first()->reciver_new,
                     'mobile' => MemberAddress::where(['id'=>$_item['express_address_id']])->first()->mobile,
+                    'mobile_new' => PayOrder::where(['id'=> $_item['id']])->first()->mobile_new,
                     'address' => MemberAddress::where(['id'=>$_item['express_address_id']])->first()->address,
+                    'address_new' => PayOrder::where(['id'=> $_item['id']])->first()->address_new,
                     'provide' => MemberAddress::where(['id'=>$_item['express_address_id']])->first()->belongsToCity->province,
                     'city' => MemberAddress::where(['id'=>$_item['express_address_id']])->first()->belongsToCity->city,
                     'area' => MemberAddress::where(['id'=>$_item['express_address_id']])->first()->belongsToCity->area,
@@ -221,8 +232,11 @@ class FinanceController extends Controller
                     'sn' => date("Ymd", strtotime($_item['created_at'])).$_item['id'],
                     'total_price' => $_item['total_price'],
                     'receiver' => MemberAddress::where(['id'=>$_item['express_address_id']])->first()->nickname,
+                    'reciver_new' => PayOrder::where(['id'=> $_item['id']])->first()->reciver_new,
                     'mobile' => MemberAddress::where(['id'=>$_item['express_address_id']])->first()->mobile,
+                    'mobile_new' => PayOrder::where(['id'=> $_item['id']])->first()->mobile_new,
                     'address' => MemberAddress::where(['id'=>$_item['express_address_id']])->first()->address,
+                    'address_new' => PayOrder::where(['id'=> $_item['id']])->first()->address_new,
                     'provide' => MemberAddress::where(['id'=>$_item['express_address_id']])->first()->belongsToCity->province,
                     'city' => MemberAddress::where(['id'=>$_item['express_address_id']])->first()->belongsToCity->city,
                     'area' => MemberAddress::where(['id'=>$_item['express_address_id']])->first()->belongsToCity->area,
@@ -297,8 +311,11 @@ class FinanceController extends Controller
                     'sn' => date("Ymd", strtotime($_item['created_at'])).$_item['id'],
                     'total_price' => $_item['total_price'],
                     'receiver' => MemberAddress::where(['id'=>$_item['express_address_id']])->first()->nickname,
+                    'reciver_new' => PayOrder::where(['id'=> $_item['id']])->first()->reciver_new,
                     'mobile' => MemberAddress::where(['id'=>$_item['express_address_id']])->first()->mobile,
+                    'mobile_new' => PayOrder::where(['id'=> $_item['id']])->first()->mobile_new,
                     'address' => MemberAddress::where(['id'=>$_item['express_address_id']])->first()->address,
+                    'address_new' => PayOrder::where(['id'=> $_item['id']])->first()->address_new,
                     'provide' => MemberAddress::where(['id'=>$_item['express_address_id']])->first()->belongsToCity->province,
                     'city' => MemberAddress::where(['id'=>$_item['express_address_id']])->first()->belongsToCity->city,
                     'area' => MemberAddress::where(['id'=>$_item['express_address_id']])->first()->belongsToCity->area,
@@ -373,8 +390,11 @@ class FinanceController extends Controller
                     'sn' => date("Ymd", strtotime($_item['created_at'])).$_item['id'],
                     'total_price' => $_item['total_price'],
                     'receiver' => MemberAddress::where(['id'=>$_item['express_address_id']])->first()->nickname,
+                    'reciver_new' => PayOrder::where(['id'=> $_item['id']])->first()->reciver_new,
                     'mobile' => MemberAddress::where(['id'=>$_item['express_address_id']])->first()->mobile,
+                    'mobile_new' => PayOrder::where(['id'=> $_item['id']])->first()->mobile_new,
                     'address' => MemberAddress::where(['id'=>$_item['express_address_id']])->first()->address,
+                    'address_new' => PayOrder::where(['id'=> $_item['id']])->first()->address_new,
                     'provide' => MemberAddress::where(['id'=>$_item['express_address_id']])->first()->belongsToCity->province,
                     'city' => MemberAddress::where(['id'=>$_item['express_address_id']])->first()->belongsToCity->city,
                     'area' => MemberAddress::where(['id'=>$_item['express_address_id']])->first()->belongsToCity->area,
@@ -448,8 +468,11 @@ class FinanceController extends Controller
                     'sn' => date("Ymd", strtotime($_item['created_at'])).$_item['id'],
                     'total_price' => $_item['total_price'],
                     'receiver' => MemberAddress::where(['id'=>$_item['express_address_id']])->first()->nickname,
+                    'reciver_new' => PayOrder::where(['id'=> $_item['id']])->first()->reciver_new,
                     'mobile' => MemberAddress::where(['id'=>$_item['express_address_id']])->first()->mobile,
+                    'mobile_new' => PayOrder::where(['id'=> $_item['id']])->first()->mobile_new,
                     'address' => MemberAddress::where(['id'=>$_item['express_address_id']])->first()->address,
+                    'address_new' => PayOrder::where(['id'=> $_item['id']])->first()->address_new,
                     'provide' => MemberAddress::where(['id'=>$_item['express_address_id']])->first()->belongsToCity->province,
                     'city' => MemberAddress::where(['id'=>$_item['express_address_id']])->first()->belongsToCity->city,
                     'area' => MemberAddress::where(['id'=>$_item['express_address_id']])->first()->belongsToCity->area,
@@ -513,34 +536,6 @@ class FinanceController extends Controller
         return ['status'=>true,'msg'=>'该订单已经被手动取消!'];
 
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

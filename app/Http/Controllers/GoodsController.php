@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Fenji;
 use App\Models\MemberAddress;
 use App\Models\Category;
 use App\Models\Goods;
@@ -15,8 +16,10 @@ class GoodsController extends Controller
 {
     public function show(Goods $goods)
     {
-
-        return home_view('goods.show',compact('category','goods'));
+        //根据会员级别获得当前的价格体系
+        $jibie = \Auth::user()->jibie;
+        $price= Fenji::where(['jibie'=>$jibie,'goods_id'=>$goods->id])->first();
+        return home_view('goods.show',compact('category','goods','price'));
     }
 
     //浏览量
@@ -83,17 +86,21 @@ class GoodsController extends Controller
 
         if ($request->isMethod('get')) {
             $list = MemberCart::where(['user_id' => CurrentUserId()])->orderBy('id', 'desc')->get();
+
+
+            //根据会员级别获得当前的价格体系
+            $jibie = \Auth::user()->jibie;
+            $price= Fenji::where(['jibie'=>$jibie])->get()->pluck('jb_price','goods_id');
+
             $data = [];
             if ($list) {
                 foreach ($list as $_item) {
                     $product_mapping = $_item->belongsToProduct;
-                    //dd($product_mapping);
-
                     $data[] = [
                         'id' => $_item['id'],
                         'quantity' => $_item['quantity'],
                         'product_id' => $_item['product_id'],
-                        'product_price' => $product_mapping['price'],
+                        'product_price' => $price[$_item['product_id']],
                         'product_stock' => $product_mapping['stock'],
                         'product_name' => $product_mapping['name'],
                         'product_main_image' => buildPicUrl($product_mapping['image']),
@@ -152,6 +159,11 @@ class GoodsController extends Controller
     //下单
     public function order(Request $request)
     {
+        //根据会员级别获得当前的价格体系
+        $jibie = \Auth::user()->jibie;
+        $price= Fenji::where(['jibie'=>$jibie])->get()->pluck('jb_price','goods_id');
+
+
         if ($request->isMethod('get')) {
             $product_id = intval($request->get('id', 0));
             $quantity = intval($request->get('quantity', 0));
@@ -166,7 +178,7 @@ class GoodsController extends Controller
                         'id' => $product_info['id'],
                         'name' => $product_info['name'],
                         'quantity' => $quantity,
-                        'price' => $product_info['price'],
+                        'price' => $price[$product_info['id']],
                         'main_image' => buildPicUrl($product_info['image']),
                     ];
                     $total_pay_money += $product_info['price'] * $quantity;
@@ -180,7 +192,7 @@ class GoodsController extends Controller
                             'id' => $_item['product_id'],
                             'name' => $product_mapping->name,
                             'quantity' => $_item['quantity'],
-                            'price' => $product_mapping->price,
+                            'price' =>$price[$_item['product_id']],
                             'main_image' => buildPicUrl($product_mapping->image),
                         ];
                         $total_pay_money += $product_mapping->price * $_item['quantity'];
@@ -248,7 +260,7 @@ class GoodsController extends Controller
             $tmp_product_info = Goods::where('id', '=', $tmp_item_info[0])->first();
 
             $items[] = [
-                'price' => $tmp_product_info->price * $tmp_item_info[1],
+                'price' => $price[$tmp_item_info[0]] * $tmp_item_info[1],
                 'quantity' => $tmp_item_info[1],
                 'target_type' => $target_type,
                 'target_id' => $tmp_item_info[0],

@@ -97,6 +97,10 @@ route::group(['prefix' => 'admin','namespace'=>'Admin'], function () {
 
         #产品记录
         Route::get('goods/{goods}/info', 'GoodsController@info')->name('admin.goods.info');
+        #设置产品的各级会员价格
+        Route::get('goods/{goods}/price', 'GoodsController@price')->name('admin.goods.price');
+        Route::post('goods/{goods}/saveprice', 'GoodsController@saveprice')->name('admin.goods.saveprice');
+
 
         #财务管理
         Route::get('finance','FinanceController@index')->name('admin.finance.index');

@@ -19,7 +19,7 @@
     <div class="pro_header">
         <div class="pro_tips">
             <h2>{{$goods->name}}</h2>
-            <h3><b>¥{{$goods->price}}</b><font>库存量：{{$goods->stock}}</font></h3>
+            <h3><b>¥{{$price->jb_price}}</b><font>库存量：{{$goods->stock}}</font></h3>
         </div>
         <span class="share_span"><i class="share_icon"></i><b>分享商品</b></span>
     </div>

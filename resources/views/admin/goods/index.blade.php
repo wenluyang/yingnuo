@@ -43,7 +43,7 @@
                                             <td class=" text-center">{{$item->id}}</td>
                                             <td>{{$item->name}}</td>
                                             <td>{{$item->price}}</td>
-                                            <td>校园外卖</td>
+                                            <td>{{$item->category->name}}</td>
                                             <td>{{$item->rebate}}</td>
                                             <td class="sorting_1"><img
                                                         src="{{buildPicUrl($item->image)}}"
@@ -52,6 +52,7 @@
                                             <td>
                                                 <a href="{{route('admin.goods.edit',['goods'=>$item->id])}}" class="btn btn-info edit">编辑</a>
                                                 <a href="{{route('admin.goods.info',['goods'=>$item->id])}}" class="btn btn-success edit">记录</a>
+                                                <a href="{{route('admin.goods.price',['goods'=>$item->id])}}" class="btn btn-warning edit">级别参数设置</a>
                                                 <a   class="btn btn-danger del" href="{{route('admin.goods.delete',['goods'=>$item->id])}}">删除</a>
                                             </td>
                                         </tr>

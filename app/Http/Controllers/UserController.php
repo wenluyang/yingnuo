@@ -14,6 +14,8 @@ use App\Models\SmsCaptcha;
 use App\Repositories\ConstantMapRes;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Fenji;
 
 class UserController extends Controller
 {
@@ -22,28 +24,31 @@ class UserController extends Controller
     {
 
         $userinfo=User::where(['id'=>CurrentUserId()])->first();
+
+        $jibie = ConstantMapRes::$jibie[Auth::user()->jibie];
         if( !$userinfo ){
             return renderJSON( [],'系统繁忙，请稍后再试~~',-1 );
         }
 
-        return home_view('user.index',compact('userinfo'));
+        return home_view('user.index',compact('userinfo','jibie'));
     }
 
     //订单
     public function order(){
+
+        //根据会员级别获得当前的价格体系
+        $jibie = \Auth::user()->jibie;
+        $price= Fenji::where(['jibie'=>$jibie])->get()->pluck('jb_price','goods_id');
+
+
         $pay_order_list = PayOrder::where([ 'user_id' => CurrentUserId() ])
             ->orderBy('id','desc')->get()->toArray();
-
-
 
         $list = [];
         if( $pay_order_list ) {
             $pay_order_items_list = PayOrderItem::where(['user_id' => CurrentUserId()])
                 ->whereIn('pay_order_id',array_column($pay_order_list, 'id'))
                 ->get()->toArray();
-
-
-
 
             $pay_order_items_mapping = [];
             foreach ($pay_order_items_list as $_pay_order_item) {
@@ -52,14 +57,13 @@ class UserController extends Controller
                     $pay_order_items_mapping[$_pay_order_item['pay_order_id']] = [];
                 }
                 $pay_order_items_mapping[$_pay_order_item['pay_order_id']][] = [
-                    'pay_price'       => $_pay_order_item['price'],
+                    'pay_price'       => $price[$_pay_order_item['target_id']],
                     'product_name'       => $tmp_product_info['name'],
                     'product_main_image' => buildPicUrl($tmp_product_info['image']),
                     'product_id' => $_pay_order_item['target_id'],
                     'comment_status' => $_pay_order_item['comment_status']
                 ];
             }
-
 
 
             foreach ($pay_order_list as $_pay_order_info) {
@@ -90,6 +94,11 @@ class UserController extends Controller
     //收藏
 
     public function fav(){
+        //根据会员级别获得当前的价格体系
+        $jibie = \Auth::user()->jibie;
+        $price= Fenji::where(['jibie'=>$jibie])->get()->pluck('jb_price','goods_id');
+
+
         $list = MemberFav::where([ 'user_id' => CurrentUserId() ])->orderBy('id','desc')->get();
         $data = [];
         if( $list ){
@@ -99,7 +108,7 @@ class UserController extends Controller
                 $data[] = [
                     'id' => $_item['id'],
                     'product_id' => $_item['product_id'],
-                    'product_price' => $book_mapping['price'],
+                    'product_price' =>$price[$_item['product_id']],
                     'product_name' => $book_mapping['name'],
                     'product_main_image' => buildPicUrl($book_mapping['image'])
                 ];

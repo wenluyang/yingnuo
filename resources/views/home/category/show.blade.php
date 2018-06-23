@@ -18,9 +18,9 @@
             <a href="{{route('home')}}">首页</a>><a href="{{route('category')}}">产品中心</a>><span>{{$category->name}}</span>
         </div>
 
-        <div class="prod_nr">
-            {!! $category->content !!}
-        </div>
+        {{--<div class="prod_nr">--}}
+            {{--{!! $category->content !!}--}}
+        {{--</div>--}}
 
         <div class="m2-prod-list-content-2">
             @foreach($category->goods as $goods)
