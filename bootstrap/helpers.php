@@ -39,7 +39,7 @@ function home_view($name)
 # 图片URL
 function buildPicUrl($file_key)
 {
-    return "/".$file_key;
+    return "http://yn.papahei.cn/".$file_key;
 }
 
 #输出json 为了方便product  article

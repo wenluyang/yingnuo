@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Fenji;
 use App\Models\MemberAddress;
-use App\Models\Category;
 use App\Models\Goods;
 use App\Models\MemberCart;
 use App\Models\MemberFav;
@@ -19,6 +18,9 @@ class GoodsController extends Controller
         //根据会员级别获得当前的价格体系
         $jibie = \Auth::user()->jibie;
         $price= Fenji::where(['jibie'=>$jibie,'goods_id'=>$goods->id])->first();
+        if (is_null($price)){
+            return '产品价格未定义';
+        }
         return home_view('goods.show',compact('category','goods','price'));
     }
 
@@ -181,7 +183,7 @@ class GoodsController extends Controller
                         'price' => $price[$product_info['id']],
                         'main_image' => buildPicUrl($product_info['image']),
                     ];
-                    $total_pay_money += $product_info['price'] * $quantity;
+                    $total_pay_money += $price[$product_info['id']] * $quantity;
                 }
             } else {//从购物车中获取商品信息
                 $cart_list = MemberCart::where(['user_id' => CurrentUserId()])->get();
@@ -195,7 +197,7 @@ class GoodsController extends Controller
                             'price' =>$price[$_item['product_id']],
                             'main_image' => buildPicUrl($product_mapping->image),
                         ];
-                        $total_pay_money += $product_mapping->price * $_item['quantity'];
+                        $total_pay_money += $price[$product_mapping->id] * $_item['quantity'];
                     }
                 }
             }

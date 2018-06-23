@@ -26,5 +26,6 @@ class AppServiceProvider extends ServiceProvider
     {
         view()->composer('admin.*', 'App\Http\ViewComposers\AdminNav');
         view()->composer('home.layouts.share', 'App\Http\ViewComposers\JssdkComposer');
+        view()->composer('home.layouts.footer', 'App\Http\ViewComposers\FooterComposer');
     }
 }

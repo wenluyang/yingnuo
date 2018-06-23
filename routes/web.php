@@ -6,6 +6,9 @@ Route::get('/qr', 'WechatController@qrcode');
 Route::group([], function(){
     Route::get('/', 'HomeController@index')->name('home');
 
+    #公司简介
+    Route::get('/page', 'PageController@index')->name('page');
+
     #商学院
     Route::get('/article', 'ArticleController@index')->name('article');
     Route::get('/article/search','ArticleController@search')->name('news.search');

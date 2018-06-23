@@ -126,10 +126,14 @@ class NewsController extends Controller
         $where = substr($where_tags, 0, strlen($where_tags) - 3);
         $rel_news = News::where(DB::raw($where))->orderBy('id', 'desc')->where('id', '!=', $news->id)->limit(5)->get();
 
+        // 用于分享的参数
+        $title = $news->title;
+        $imgUrl = buildPicUrl($news->image);
+        $desc = $news->description;
 
         //是否收藏
         //$hasfaved= UserFav::where(['user_id'=>$user_id,'befav_id'=>$news->id,'type'=>'App\Models\News'])->get()->count();
-        return home_view('news.show', compact('news', 'rel_news'));
+        return home_view('news.show', compact('news', 'rel_news','title','desc','imgUrl'));
     }
 
 }

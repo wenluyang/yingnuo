@@ -41,5 +41,5 @@
 @stop('content')
 
 @section('js')
-    <script src="/js/product/cart.js"></script></body>
+    <script src="/js/product/cart.js"></script>
 @stop

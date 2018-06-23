@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\City;
-use App\Models\Kuaidi;
+//use App\Models\Kuaidi;
 use App\Models\MemberAddress;
 use App\Models\PayOrder;
 use App\Models\PayOrderItem;
@@ -14,6 +14,7 @@ use App\Models\User;
 use App\Repositories\StockChangeLogRes;
 use Illuminate\Http\Request;
 use App\Repositories\ConstantMapRes;
+use EasyWeChat\Kernel\Messages\Text;
 
 class FinanceController extends Controller
 {
@@ -501,6 +502,15 @@ class FinanceController extends Controller
         $query = PayOrder::where(['status' => 1,'id'=>$id])->orderBy('id', 'desc')->first();
         $query->express_status=1;
         $query->save();
+
+        //确认订单后给该订单的用户发送消息
+        $open_id= User::where(['id'=>$query->user_id])->first()->open_id;
+        $app = app('wechat.official_account');
+        $message="您的订单已经完成，在使用我们产品过程中如有任何问题，请拨打我们的客服电话：0531-88032833";
+        $app->customer_service->message($message)->to($open_id)->send();
+
+
+
         return ['status'=>true,'msg'=>'该订单已经被手动完成!'];
 
     }
@@ -642,6 +652,69 @@ class FinanceController extends Controller
         $payorder->pay_time=date('Y-m-d H:i:s', time());
         $payorder->express_status=-7;
         $payorder->save();
+
+
+        $sn=date("Ymd",strtotime( $payorder->created_at ) ).$payorder->id;
+
+        //此订单的一些信息
+        $order_item_list = PayOrderItem::where([ 'pay_order_id' =>  $payorder->id ])->get()->toArray();
+        $product_mapping = Goods::whereIn('id',array_column( $order_item_list,"target_id" ))->get()->toArray();
+
+
+
+
+        $pay_order_items = [];
+        foreach( $order_item_list as $_order_item_info ){
+            $tmp_product_info =Goods::where(['id'=>$_order_item_info['target_id']])->first();
+
+
+            $pay_order_items[] = [
+                'name' => $tmp_product_info['name'],
+                'quantity' => $_order_item_info['quantity'],
+                'price' => $_order_item_info['price'],
+            ];
+        }
+
+
+        $message_address="您的收件信息为:\r\n";
+        $data_pay_order_info = [
+            'address_new' => $payorder->address_new,
+            'reciver_new' => $payorder->reciver_new,
+            'mobile_new' => $payorder->mobile_new,
+            'express_address_id' => $payorder->express_address_id,
+        ];
+
+        if($data_pay_order_info['reciver_new']==null){
+            $address_info = MemberAddress::where([ 'id' => $data_pay_order_info['express_address_id'] ])->first();
+            $area_info = City::where([ 'id' => $address_info['area_id']  ])->first();
+            $area = $area_info['province'].$area_info['city'];
+            if( $address_info['province_id'] != $address_info['city_id'] ){
+                $area .= $area_info['area_id'];
+            }
+            $reciver=$address_info->nickname;
+            $mobile=$address_info->mobile;
+            $address=$address_info->address;
+
+            $message_address=$message_address."收件人:".$reciver."\r\n 联系电话:".$mobile."\r\n收件地址：".$area.$address.'\r\n\r\n';
+        }else{
+            $message_address=$message_address."收件人:".$data_pay_order_info['reciver_new']."\r\n 联系电话:".$data_pay_order_info['mobile_new']."\r\n收件地址：".$data_pay_order_info['address_new'].'\r\n\r\n';
+        }
+
+        $message_goods="您订购的产品为:\r\n";
+          foreach ($pay_order_items as $k){
+              $message_goods=$message_goods."产品名称:".$k['name']."\r\n 订购数量:".$k['quantity']."\r\n";
+          }
+
+
+
+        //确认订单后给该订单的用户发送消息
+        $open_id= User::where(['id'=>$payorder->user_id])->first()->open_id;
+        $app = app('wechat.official_account');
+        $message="您的订单已经审核！\r\n------------------------------订单号:".$sn."\r\n".$message_goods."\r\n------------------------------".$message_address;
+        $app->customer_service->message($message)->to($open_id)->send();
+
+
+
         return ['status'=>true,'msg'=>'订单确认成功!'];
     }
 
@@ -657,6 +730,20 @@ class FinanceController extends Controller
         if(!$payorder->express_info){
             return ['status'=>false,'msg'=>'快递信息：快递单号未填写'];
         }
+
+
+        //确认订单后给该订单的用户发送消息
+        $open_id= User::where(['id'=>$payorder->user_id])->first()->open_id;
+        $express_id=$payorder->express_id;
+        $kuaidi= ConstantMapRes::$express[$express_id];
+        $express_info=$payorder->express_info;
+
+
+
+        $app = app('wechat.official_account');
+        $message="您的订单已经发货！\r\n------------------------------委托快递:".$kuaidi."\r\n快递单号".$express_info."\r\n";
+        $app->customer_service->message($message)->to($open_id)->send();
+
 
         $payorder->express_status = -6;
         $payorder->save();

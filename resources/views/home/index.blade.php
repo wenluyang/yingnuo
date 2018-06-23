@@ -20,10 +20,10 @@
 
         <!--图标分类-->
         <div class="weui-flex wy-iconlist-box">
-            <div class="weui-flex__item"><a href="#" class="wy-links-iconlist"><div class="img"><img src="images/icon-link1.png"></div><p>关于盈诺</p></a></div>
+            <div class="weui-flex__item"><a href="{{route('page',['id'=>1])}}" class="wy-links-iconlist"><div class="img"><img src="images/icon-link1.png"></div><p>关于盈诺</p></a></div>
             <div class="weui-flex__item"><a href="{{route('category')}}" class="wy-links-iconlist"><div class="img"><img src="images/icon-link2.png"></div><p>产品中心</p></a></div>
             <div class="weui-flex__item"><a href="{{route('article')}}" class="wy-links-iconlist"><div class="img"><img src="images/icon-link3.png"></div><p>商学院</p></a></div>
-            <div class="weui-flex__item"><a href="#" class="wy-links-iconlist"><div class="img"><img src="images/icon-link4.png"></div><p>经销商故事</p></a></div>
+            <div class="weui-flex__item"><a href="{{route('page',['id'=>2])}}" class="wy-links-iconlist"><div class="img"><img src="images/icon-link4.png"></div><p>经销商故事</p></a></div>
         </div>
         <!--头条切换-->
         <div class="wy-ind-news">
@@ -72,7 +72,7 @@
                         </div>
                     </li>
                     <li>
-                        <div  style="float:left; padding-left:1%;"class="youshi_con">
+                        <div  style="padding-left:2%;"class="youshi_con">
                             <span>创新搭配</span>
                             <p>轻便且具有同冲同吸功能的管道设计，配备防溅罩和脚踏开关设置更安全洁净。</p>
                         </div>
@@ -86,7 +86,7 @@
                         </div>
                     </li>
                     <li>
-                        <div  style="float:left; padding-left:1%;"class="youshi_con">
+                        <div  style="padding-left:2%;"class="youshi_con">
                             <span>经济实惠</span>
                             <p>相比于同行业，价格更易于被医院及患者接受，且在强制降价的背景下产品依然保质保量。</p>
                         </div>
@@ -203,7 +203,7 @@
             pagination: '.swiper-pagination1',
             loop: true,
             paginationType:'fraction',
-            slidesPerView:3,
+            slidesPerView:2,
             paginationClickable: true,
             spaceBetween: 2
         });

@@ -1,4 +1,4 @@
-@extends('home.layouts.app',['isshare'=>false,'hasfooter'=>true])
+@extends('home.layouts.app',['isshare'=>true,'hasfooter'=>true])
 @section('title')
     {{$category->name}}
 @stop

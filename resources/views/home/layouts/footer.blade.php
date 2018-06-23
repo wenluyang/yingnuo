@@ -15,7 +15,9 @@
         <p class="weui-tabbar__label">积分商城</p>
     </a>
     <a href="{{route('goods.cart')}}" class="weui-tabbar__item">
-        <span class="weui-badge" style="position: absolute;top: -.4em;right: 1em;">10</span>
+        @if ($count>0)
+        <span class="weui-badge" style="position: absolute;top: -.4em;right: 1em;">{{$count}}</span>
+        @endif
         <div class="weui-tabbar__icon foot-menu-cart"></div>
         <p class="weui-tabbar__label">购物车</p>
     </a>

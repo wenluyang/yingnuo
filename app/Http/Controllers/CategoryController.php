@@ -21,9 +21,13 @@ class CategoryController extends Controller
 
     public function show(Category $category)
     {
+        // 用于分享的参数
+        $title = $category->name;
+        $imgUrl = buildPicUrl($category->image);
+        $desc = $category->description;
         $banners = CategoryBanner::orderBy('sort','desc')->get();
 
 
-        return home_view('category.show', compact('category','banners'));
+        return home_view('category.show', compact('category','banners','title','desc','imgUrl'));
     }
 }

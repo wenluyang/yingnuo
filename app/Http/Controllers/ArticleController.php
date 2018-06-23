@@ -27,11 +27,12 @@ class ArticleController extends Controller
         foreach ($list as $_item) {
             $data[] = [
                 'id' => $_item['id'],
-                'title' => $_item['title'],
+                'title' => str_limit($_item['title'],32,'...'),
                 'news_image_url' => buildPicUrl($_item['image']),
                 'view_count' => $_item['view_count'],
                 'video' => $_item['video'],
                 'recom' => $_item['recom'],
+                'created_at' => date('Y-m-d',strtotime($_item['created_at'])),
                 'description' => str_limit($_item['description'],48,'...'),
             ];
         }
@@ -99,11 +100,12 @@ class ArticleController extends Controller
         foreach ($list as $_item) {
             $data[] = [
                 'id' => $_item['id'],
-                'title' => $_item['title'],
+                'title' => str_limit($_item['title'],32,'...'),
                 'main_image_url' => buildPicUrl($_item['image']),
                 'view_count' => $_item['view_count'],
                 'video' => $_item['video'],
                 'recom' => $_item['recom'],
+                'created_at' => date('Y-m-d',strtotime($_item['created_at'])),
                 'description' => str_limit($_item['description'],48,'...'),
             ];
         }
@@ -130,9 +132,14 @@ class ArticleController extends Controller
         $article->view_count=$article->view_count+1;
         $article->update();
 
+        // 用于分享的参数
+        $title = $article->title;
+        $imgUrl = buildPicUrl($article->image);
+        $desc = $article->description;
+
         //是否收藏
         //$hasfaved= MemberFav::where(['user_id'=>$user_id,'befav_id'=>$article->id,'type'=>'App\Models\News'])->get()->count();
-        return home_view('article.show', compact('article', 'rel_article'));
+        return home_view('article.show', compact('article', 'rel_article','title','imgUrl','desc'));
     }
 
 }

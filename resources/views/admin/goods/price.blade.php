@@ -17,6 +17,7 @@
         </tr>
         </thead>
         <tbody>
+
         @foreach($jibie as $item)
         <tr>
             <td>
@@ -33,12 +34,12 @@
             </td>
             <td>
                 <div class="form-group ">
-                    <input type="text" required=""  class="form-control" name="jb_price[]" value="{{$fenji_price[$item->id]}}" required>
+                    <input type="text" required=""  class="form-control" name="jb_price[]" value="{{!$fenji_price->isEmpty()?$fenji_price[$item->id]:''}}" required>
                 </div>
             </td>
             <td>
                 <div class="form-group ">
-                    <input type="text" class="form-control" name="jb_rebase[]" value="{{$fenji_rebase[$item->id]}}" required>
+                    <input type="text" class="form-control" name="jb_rebase[]" value="{{!$fenji_rebase->isEmpty()?$fenji_rebase[$item->id]:''}}" required>
                 </div>
             </td>
         </tr>

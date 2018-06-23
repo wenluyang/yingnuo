@@ -51,7 +51,11 @@ var product_index_ops = {
                         var html = "";
                         for( idx in res.data.data ){
                             var info = res.data.data[ idx ];
-                            html += '<li><img src="'+ info['main_image_url'] +'"  class="con_sxy_hd"/><div class="con_sxy_con"><a href="' + common_ops.buildMUrl( "article/###/show".replace('###', info['id'] )) + '">'+ info['title'] +'</a><p>'+ info['description'] +'<a style=color:#e50012;href="' + common_ops.buildMUrl( "article/###/show".replace('###', info['id'] )) + '">【点击详情】</a></p></div></li>'
+                            // html += '<li><img src="'+ info['main_image_url'] +'"  class="con_sxy_hd"/><div class="con_sxy_con"><a href="' + common_ops.buildMUrl( "article/###/show".replace('###', info['id'] )) + '">'+ info['title'] +'</a><p>'+ info['description'] +'<a style=color:#e50012;href="' + common_ops.buildMUrl( "article/###/show".replace('###', info['id'] )) + '">【点击详情】</a></p></div></li>'
+    html += '<li><a href="' + common_ops.buildMUrl( "article/###/show".replace('###', info['id'] )) + '"><img src="'+ info['main_image_url'] +'"  class="con_sxy_hd"/></a><div class="con_sxy_con"><a href="' + common_ops.buildMUrl( "article/###/show".replace('###', info['id'] )) + '">'+ info['title'] +'</a><p>'+info['created_at']+'</p></div></li>'
+
+
+
                         }
 
                         $(".probox ul.prolist").append( html );
